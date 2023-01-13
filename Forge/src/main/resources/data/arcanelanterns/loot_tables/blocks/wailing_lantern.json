@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "magic_lanterns:wailing_lantern"
+          "name": "arcanelanterns:wailing_lantern"
         }
       ],
       "conditions": [

@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "magic_lanterns:block/spark" }
+    "": { "model": "arcanelanterns:block/spark" }
   }
 }

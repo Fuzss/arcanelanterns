@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/template_lantern",
 	"textures": {
-		"lantern": "magic_lanterns:blocks/warding_lantern"
+		"lantern": "arcanelanterns:blocks/warding_lantern"
 	}
 }

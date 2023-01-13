@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "magic_lanterns:items/withering_lantern"
+    "layer0": "arcanelanterns:items/withering_lantern"
   }
 }

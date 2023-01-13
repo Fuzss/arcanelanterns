@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "magic_lanterns:feral_lantern"
+          "name": "arcanelanterns:feral_lantern"
         }
       ],
       "conditions": [

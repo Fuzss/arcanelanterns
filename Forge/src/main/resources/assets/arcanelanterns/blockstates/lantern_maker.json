@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "magic_lanterns:block/lantern_maker" }
+    "": { "model": "arcanelanterns:block/lantern_maker" }
   }
 }
