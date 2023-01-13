@@ -5,6 +5,7 @@
   "package": "fuzs.arcanelanterns.mixin",
   "refmap": "arcanelanterns.refmap.json",
   "mixins": [
+    "LivingEntityMixin"
   ],
   "client": [
   ],

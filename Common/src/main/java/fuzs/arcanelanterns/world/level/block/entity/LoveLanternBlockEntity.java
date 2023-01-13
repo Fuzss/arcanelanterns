@@ -1,14 +1,17 @@
 package fuzs.arcanelanterns.world.level.block.entity;
 
-import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.init.ModRegistry;
-import fuzs.arcanelanterns.networking.ClientboundLoveHeartsMessage;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoveLanternBlockEntity extends BlockEntity {
     private int count;
@@ -18,14 +21,19 @@ public class LoveLanternBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, LoveLanternBlockEntity blockEntity) {
-        if (++blockEntity.count <= 1000) return;
-        level.getEntities(null, new AABB(pos.getX() - 5, pos.getY() - 5, pos.getZ() - 5, pos.getX() + 5, pos.getY() + 5, pos.getZ() + 5)).forEach((entity) -> {
-            if (entity instanceof Animal animal) {
-                animal.setInLoveTime(200);
-                BlockPos entityPos = entity.blockPosition();
-                ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundLoveHeartsMessage(entityPos), entityPos, level);
+        if (++blockEntity.count <= 1200) return;
+        final int horizontalRange = 5;
+        final int verticalRange = 3;
+        List<Animal> nearbyAnimals = level.getEntitiesOfClass(Animal.class, new AABB(pos.getX() - horizontalRange, pos.getY() - verticalRange, pos.getZ() - horizontalRange, pos.getX() + horizontalRange, pos.getY() + verticalRange, pos.getZ() + horizontalRange));
+        Collection<List<Animal>> animalsByType = nearbyAnimals.stream().collect(Collectors.groupingBy(Entity::getType)).values();
+        for (List<Animal> animals : animalsByType) {
+            if (animals.size() <= 12) {
+                animals.removeIf(animal -> animal.getAge() != 0 || !animal.canFallInLove());
+                if (animals.size() >= 2) {
+                    animals.forEach(animal -> animal.setInLove(null));
+                }
             }
-        });
+        }
         blockEntity.count = 0;
     }
 }

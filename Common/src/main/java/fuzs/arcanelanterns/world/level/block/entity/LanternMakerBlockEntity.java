@@ -100,4 +100,10 @@ public class LanternMakerBlockEntity extends BlockEntity implements ContainerImp
         this.saveAdditional(tag);
         return tag;
     }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+    }
 }
