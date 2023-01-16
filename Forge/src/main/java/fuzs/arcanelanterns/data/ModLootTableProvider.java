@@ -50,7 +50,7 @@ public class ModLootTableProvider extends LootTableProvider {
             this.dropSelf(ModRegistry.LOVE_LANTERN_BLOCK.get());
             this.dropSelf(ModRegistry.WAILING_LANTERN_BLOCK.get());
             this.dropSelf(ModRegistry.BOREAL_LANTERN_BLOCK.get());
-            this.dropSelf(ModRegistry.BRILIANT_LANTERN_BLOCK.get());
+            this.dropSelf(ModRegistry.BRILLIANT_LANTERN_BLOCK.get());
             this.dropSelf(ModRegistry.WARDING_LANTERN_BLOCK.get());
             this.dropSelf(ModRegistry.CONTAINING_LANTERN_BLOCK.get());
             this.dropSelf(ModRegistry.WITHERING_LANTERN_BLOCK.get());

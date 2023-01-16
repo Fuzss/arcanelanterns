@@ -21,7 +21,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.LOVE_LANTERN_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.WAILING_LANTERN_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.BOREAL_LANTERN_BLOCK.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.BRILIANT_LANTERN_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.BRILLIANT_LANTERN_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.WARDING_LANTERN_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.CONTAINING_LANTERN_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.WITHERING_LANTERN_BLOCK.get());

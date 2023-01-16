@@ -6,48 +6,20 @@
   "block.arcanelanterns.love_lantern" : "Love Lantern",
   "block.arcanelanterns.wailing_lantern": "Wailing Lantern",
   "block.arcanelanterns.boreal_lantern": "Boreal Lantern",
-  "block.arcanelanterns.briliant_lantern": "Briliant Lantern",
+  "block.arcanelanterns.briliant_lantern": "Brilliant Lantern",
   "block.arcanelanterns.warding_lantern" : "Warding Lantern",
   "block.arcanelanterns.containing_lantern" : "Containment Lantern",
   "block.arcanelanterns.withering_lantern" : "Withering Lantern",
   "block.arcanelanterns.cloud_lantern" : "Cloud Lantern",
-
-
-  "title.arcanelanterns.page0": "Introduction",
-  "text.arcanelanterns.page0": "Light is a wonderful element that allowed life to flourish when the world was still young. If one could harness such power, many great things could be achieved. After many hours of study, I finally found a way to imbue a normal lantern with different catalysts to manipulate its effects. If my theory is correct an altar will be required...",
-
-  "title.arcanelanterns.page1": "Lantern Maker",
-  "text.arcanelanterns.page1": "The lantern maker can be crafted in a crafting table, to imbue a lantern the altar will require up to 10 catalysts and a lantern block placed on top of it, if the recipe is correct particles will appear!",
-
-  "title.arcanelanterns.page2": "Life Lantern",
-  "text.arcanelanterns.page2": "Effects: Applies regeneration to nearby entities / crops around the lantern grow faster\n\nRecipe: egg + melon (block) + golden_apple + sugar cane + bone meal",
-
-  "title.arcanelanterns.page3": "Feral Lantern",
-  "text.arcanelanterns.page3": "Effects: Lights up a giant area below it by spawning sparks, each feral lantern can spawn a maximum of 100\n\nRecipe: glowstone + jack-o-lantern + fire charge + blaze powder + gold ingot",
-
-  "title.arcanelanterns.page4": "Love Lantern",
-  "text.arcanelanterns.page4": "Effects: Makes nearby mobs fall in love\n\nRecipe: diamond + rabbit foot + golden carrot + beetroot + life lantern + honey bottle",
-
-  "title.arcanelanterns.page5": "Wailing Lantern",
-  "text.arcanelanterns.page5": "Effects: Cries if you get close / screams and applies nausea if you get too close\n\nRecipe: ghast tear + warped roots + flint + pufferfish + ink sac",
-
-  "title.arcanelanterns.page6": "Boreal Lantern",
-  "text.arcanelanterns.page6": "Effects: Slows nearby mobs\n\nRecipe: cobweb + snowball + packed ice + quartz",
-
-  "title.arcanelanterns.page7": "Briliant Lantern",
-  "text.arcanelanterns.page7": "Effects: Turns nearby mobs directly into experience (max health / 2)\n\nRecipe: shulker shell + paper + snowball + phantom membrane",
-
-  "title.arcanelanterns.page8": "Warding Lantern",
-  "text.arcanelanterns.page8": "Effects: Pushes all living entities except players away \n\nRecipe: warped fungus + pufferfish + iron door + obsidian",
-
-  "title.arcanelanterns.page9": "Containment Lantern",
-  "text.arcanelanterns.page9": "Effects: Keeps all living entities except the player confined to an area\n\nRecipe: warding lantern + fishing rod + cobweb + chain",
-
-  "title.arcanelanterns.page10": "Withering Lantern",
-  "text.arcanelanterns.page10": "Effects: Applies the wither effect in a large area around it\n\nRecipe: wither rose + soul sand + firework star+ coal",
-
-  "title.arcanelanterns.page11": "Cloud Lantern",
-  "text.arcanelanterns.page11": "Effects: Applies the slow fall effect in a large area around it\n\nRecipe: phantom membrane + soul torch + snow block + white wool"
-
-
+  "block.arcanelanterns.lantern_maker.info": "To imbue a lantern the lantern maker will require a number of catalysts. Finally, place a lantern block on top to fuse everything together.",
+  "block.arcanelanterns.life_lantern.info": "Makes crops around the lantern grow faster.",
+  "block.arcanelanterns.feral_lantern.info": "Lights up a giant area around it by spawning sparks. When the area is lit up and enough sparks have been spawned the lantern vanishes.",
+  "block.arcanelanterns.love_lantern.info": "Makes nearby mobs fall in love.",
+  "block.arcanelanterns.wailing_lantern.info": "Cries if you get close, screams and applies nausea if you get even closer.",
+  "block.arcanelanterns.boreal_lantern.info": "Slows nearby mobs and players down, also extinguishes burning mobs.",
+  "block.arcanelanterns.briliant_lantern.info": "Turns nearby animals directly into experience.",
+  "block.arcanelanterns.warding_lantern.info": "Pushes all living entities except players away.",
+  "block.arcanelanterns.containing_lantern.info": "Keeps all living entities except the player confined to an area.",
+  "block.arcanelanterns.withering_lantern.info": "Applies the wither effect in the area around it.",
+  "block.arcanelanterns.cloud_lantern.info": "Applies the slow fall effect in the area around it."
 }

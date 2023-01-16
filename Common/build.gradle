@@ -24,6 +24,9 @@ dependencies {
     implementation 'com.electronwill.night-config:core:3.6.5'
     implementation 'com.electronwill.night-config:toml:3.6.5'
 
+    // Just Enough Items
+    modApi("mezz.jei:jei-1.19.2-common-api:11.3.0.271")
+
     // Puzzles Lib
     modImplementation "fuzs.puzzleslib:puzzleslib-common:${puzzlesVersion}"
 }

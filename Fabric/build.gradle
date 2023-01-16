@@ -46,6 +46,11 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabricVersion}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabricApiVersion}"
 
+    // Just Enough Items
+    modCompileOnlyApi("mezz.jei:jei-1.19.2-common-api:11.3.0.271")
+    modCompileOnlyApi("mezz.jei:jei-1.19.2-fabric-api:11.3.0.271")
+    modRuntimeOnly("mezz.jei:jei-1.19.2-fabric:11.3.0.271")
+
     // Quality of Life Mods
     modRuntimeOnly "com.terraformersmc:modmenu:4.0.6"
     modRuntimeOnly "curse.maven:tooltipfix-411557:3820437"

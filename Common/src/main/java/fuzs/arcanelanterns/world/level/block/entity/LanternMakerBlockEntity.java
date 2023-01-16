@@ -9,12 +9,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,21 +32,31 @@ public class LanternMakerBlockEntity extends BlockEntity implements ContainerImp
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, LanternMakerBlockEntity blockEntity) {
-        BlockState above = level.getBlockState(pos.above());
-        if (above.is(Blocks.LANTERN) || above.is(Blocks.SOUL_LANTERN)) {
+        BlockPos posAbove = pos.above();
+        BlockState stateAbove = level.getBlockState(posAbove);
+        if (stateAbove.is(Blocks.LANTERN) || stateAbove.is(Blocks.SOUL_LANTERN)) {
             ItemStack result = blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(recipe -> recipe.assemble(blockEntity)).orElse(ItemStack.EMPTY);
             if (!result.isEmpty()) {
                 for (ItemStack stack : blockEntity.items) {
                     if (!stack.isEmpty()) stack.shrink(1);
                 }
                 blockEntity.setChanged();
-                level.destroyBlock(pos.above(), false);
+                level.destroyBlock(posAbove, false);
                 dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result);
                 ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundCraftLanternParticlesMessage(pos), pos, level);
             } else {
-                level.destroyBlock(pos.above(), true);
+                destroyBlockDropCentered(level, stateAbove, posAbove);
             }
         }
+    }
+
+    private static void destroyBlockDropCentered(Level level, BlockState state, BlockPos pos) {
+        BlockEntity blockEntityAbove = state.hasBlockEntity() ? level.getBlockEntity(pos) : null;
+        level.destroyBlock(pos, false);
+        Block.getDrops(state, (ServerLevel) level, pos, blockEntityAbove, null, ItemStack.EMPTY).forEach((itemStack) -> {
+            dropItemStack(level, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, itemStack);
+        });
+        state.spawnAfterBreak((ServerLevel) level, pos, ItemStack.EMPTY, true);
     }
 
     public static void dropItemStack(Level level, double posX, double posY, double posZ, ItemStack stack) {

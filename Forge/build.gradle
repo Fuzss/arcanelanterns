@@ -113,6 +113,11 @@ dependencies {
     minecraft "net.minecraftforge:forge:${forgeVersion}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    // Just Enough Items
+    compileOnly(fg.deobf("mezz.jei:jei-1.19.2-common-api:11.3.0.271"))
+    compileOnly(fg.deobf("mezz.jei:jei-1.19.2-forge-api:11.3.0.271"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-1.19.2-forge:11.3.0.271"))
+
     // Quality of Life Mods
     runtimeOnly fg.deobf("curse.maven:catalogue-459701:3873264")
     runtimeOnly fg.deobf("fuzs.bettermodsbutton:bettermodsbutton-forge:4.2.0")

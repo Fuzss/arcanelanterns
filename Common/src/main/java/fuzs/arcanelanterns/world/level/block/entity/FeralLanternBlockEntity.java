@@ -55,6 +55,6 @@ public class FeralLanternBlockEntity extends LanternBlockEntity {
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        this.placedFlares = tag.getInt("TotalFlares");
+        this.placedFlares = tag.getInt(TAG_FLARES);
     }
 }

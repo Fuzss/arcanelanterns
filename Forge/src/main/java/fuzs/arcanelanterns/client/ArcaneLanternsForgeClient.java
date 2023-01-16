@@ -34,7 +34,7 @@ public class ArcaneLanternsForgeClient {
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.LOVE_LANTERN_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.WAILING_LANTERN_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.BOREAL_LANTERN_BLOCK.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModRegistry.BRILIANT_LANTERN_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModRegistry.BRILLIANT_LANTERN_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.WARDING_LANTERN_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.CONTAINING_LANTERN_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.WITHERING_LANTERN_BLOCK.get(), RenderType.cutout());
@@ -43,6 +43,7 @@ public class ArcaneLanternsForgeClient {
 
     @SubscribeEvent
     public static void onRegisterRecipeBookCategories(final RegisterRecipeBookCategoriesEvent evt) {
+        // just skip this on Fabric, it's not very important (just prints a warning to the log) and Fabric has no api for it
         RecipeBookCategories category = RecipeBookCategories.create(ArcaneLanterns.MOD_NAME.toUpperCase(Locale.ROOT).replace(" ", "_") + "_LANTERN_MAKER");
         evt.registerRecipeCategoryFinder(ModRegistry.LANTERN_MAKING_RECIPE_TYPE.get(), recipe -> category);
     }

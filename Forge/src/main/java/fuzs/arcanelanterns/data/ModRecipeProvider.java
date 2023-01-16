@@ -70,7 +70,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(Items.QUARTZ)
                 .unlockedBy(getHasName(Items.LANTERN), has(Items.LANTERN, Items.SOUL_LANTERN))
                 .save(consumer);
-        LanternMakingRecipeBuilder.recipe(ModRegistry.BRILIANT_LANTERN_BLOCK.get())
+        LanternMakingRecipeBuilder.recipe(ModRegistry.BRILLIANT_LANTERN_BLOCK.get())
                 .requires(Items.SHULKER_SHELL)
                 .requires(Items.PAPER)
                 .requires(Items.SNOWBALL)

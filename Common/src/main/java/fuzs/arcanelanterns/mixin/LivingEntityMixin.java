@@ -20,7 +20,7 @@ abstract class LivingEntityMixin extends Entity {
     @ModifyVariable(method = "travel", at = @At(value = "STORE", ordinal = 1), ordinal = 0)
     public double travel(double gravityStrength) {
         if (!ArcaneLanterns.CONFIG.get(ServerConfig.class).slowFallingQuickDescent) return gravityStrength;
-        if (gravityStrength == 0.01 && this.isDescending()) return 0.08;
+        if (Math.abs(gravityStrength - 0.01) < 0.00000001 && this.isDescending()) return 0.08;
         return gravityStrength;
     }
 }

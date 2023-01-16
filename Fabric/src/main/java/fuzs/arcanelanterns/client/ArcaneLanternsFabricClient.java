@@ -21,7 +21,7 @@ public class ArcaneLanternsFabricClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.LOVE_LANTERN_BLOCK.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.WAILING_LANTERN_BLOCK.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.BOREAL_LANTERN_BLOCK.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.BRILIANT_LANTERN_BLOCK.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.BRILLIANT_LANTERN_BLOCK.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.WARDING_LANTERN_BLOCK.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.CONTAINING_LANTERN_BLOCK.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModRegistry.WITHERING_LANTERN_BLOCK.get(), RenderType.cutout());
