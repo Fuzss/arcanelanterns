@@ -20,6 +20,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**
+ * a lot of this code comes from Botania's runic altar
+ * <p><a href="https://github.com/VazkiiMods/Botania/blob/1.19.x/Xplat/src/main/java/vazkii/botania/client/integration/jei/RunicAltarRecipeCategory.java">RunicAltarRecipeCategory.java</a>
+ */
 public class LanternMakingRecipeCategory implements IRecipeCategory<LanternMakingRecipe> {
     private final Component title;
     private final IDrawable background;
