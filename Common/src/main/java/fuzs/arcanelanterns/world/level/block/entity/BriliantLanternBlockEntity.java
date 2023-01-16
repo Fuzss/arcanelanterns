@@ -1,31 +1,51 @@
 package fuzs.arcanelanterns.world.level.block.entity;
 
+import fuzs.arcanelanterns.ArcaneLanterns;
+import fuzs.arcanelanterns.config.ServerConfig;
 import fuzs.arcanelanterns.init.ModRegistry;
+import fuzs.arcanelanterns.mixin.accessor.LivingEntityAccessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-public class BriliantLanternBlockEntity extends BlockEntity {
-    private int count;
+import java.util.List;
+
+public class BriliantLanternBlockEntity extends LanternBlockEntity {
 
     public BriliantLanternBlockEntity(BlockPos pos, BlockState state) {
         super(ModRegistry.BRILIANT_LANTERN_BLOCK_ENTITY.get(), pos, state);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, BriliantLanternBlockEntity blockEntity) {
-        if (++blockEntity.count <= 20) return;
-        level.getEntities(null, new AABB(pos.getX() + 0.5 - 4, pos.getY() + 0.5 - 4, pos.getZ() + 0.5 - 4, pos.getX() + 0.5 + 4, pos.getY() + 0.5 + 4, pos.getZ() + 0.5 + 4)).forEach((entity) -> {
-            if (entity instanceof LivingEntity && !(entity instanceof Player) && !(entity instanceof EnderDragon)) {
-                level.addFreshEntity(new ExperienceOrb(level, entity.getX(), entity.getY(), entity.getZ(), (int) ((((LivingEntity) entity).getMaxHealth()) / 2)));
-                entity.discard();
-            }
-        });
+        ServerConfig.BriliantLanternConfig config = ArcaneLanterns.CONFIG.get(ServerConfig.class).briliantLantern;
+        if (++blockEntity.count <= config.delay) return;
+        final int horizontalRange = config.horizontalRange;
+        final int verticalRange = config.verticalRange;
+        List<Animal> animals = level.getEntitiesOfClass(Animal.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), BriliantLanternBlockEntity::isValidAnimal);
+        if (!animals.isEmpty()) {
+            Animal animal = animals.get(0);
+            // make sure equipment still drops, but nothing else
+            killWithoutLoot(level, animal);
+            // allow experience to drop
+            animal.setLastHurtByPlayer(null);
+            ((LivingEntityAccessor) animal).arcanelanterns$dropExperience();
+        }
         blockEntity.count = 0;
+    }
+
+    private static boolean isValidAnimal(Animal animal) {
+        return animal.shouldDropExperience() && (!(animal instanceof TamableAnimal tamableAnimal) || !tamableAnimal.isTame()) && !ArcaneLanterns.CONFIG.get(ServerConfig.class).briliantLantern.blacklist.contains(animal.getType());
+    }
+
+    private static void killWithoutLoot(Level level, LivingEntity entity) {
+        boolean doMobLoot = level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT);
+        level.getGameRules().getRule(GameRules.RULE_DOMOBLOOT).set(false, level.getServer());
+        entity.kill();
+        level.getGameRules().getRule(GameRules.RULE_DOMOBLOOT).set(doMobLoot, level.getServer());
     }
 }

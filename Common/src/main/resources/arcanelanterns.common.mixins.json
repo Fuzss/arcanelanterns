@@ -5,7 +5,8 @@
   "package": "fuzs.arcanelanterns.mixin",
   "refmap": "arcanelanterns.refmap.json",
   "mixins": [
-    "LivingEntityFabricMixin"
+    "LivingEntityMixin",
+    "accessor.LivingEntityAccessor"
   ],
   "client": [
   ],

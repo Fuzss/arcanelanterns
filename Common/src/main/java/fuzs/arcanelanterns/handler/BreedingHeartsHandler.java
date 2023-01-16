@@ -1,5 +1,7 @@
 package fuzs.arcanelanterns.handler;
 
+import fuzs.arcanelanterns.ArcaneLanterns;
+import fuzs.arcanelanterns.config.ServerConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
@@ -11,6 +13,7 @@ import java.util.Optional;
 public class BreedingHeartsHandler {
 
     public static Optional<Unit> onLivingUpdate(LivingEntity entity) {
+        if (!ArcaneLanterns.CONFIG.get(ServerConfig.class).permanentBreedingHearts) return Optional.empty();
         if (!entity.level.isClientSide &&  entity instanceof Animal animal) {
             if (animal.getInLoveTime() > 0 && animal.getInLoveTime() % 10 == 0) {
                 double posX = animal.getRandom().nextGaussian() * 0.02;

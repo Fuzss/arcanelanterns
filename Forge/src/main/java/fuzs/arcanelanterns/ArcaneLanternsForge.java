@@ -1,5 +1,6 @@
 package fuzs.arcanelanterns;
 
+import fuzs.arcanelanterns.data.ModBlockTagsProvider;
 import fuzs.arcanelanterns.data.ModLootTableProvider;
 import fuzs.arcanelanterns.data.ModRecipeProvider;
 import fuzs.arcanelanterns.handler.BreedingHeartsHandler;
@@ -32,8 +33,9 @@ public class ArcaneLanternsForge {
     @SubscribeEvent
     public static void onGatherData(final GatherDataEvent evt) {
         DataGenerator generator = evt.getGenerator();
-        final ExistingFileHelper existingFileHelper = evt.getExistingFileHelper();
+        final ExistingFileHelper fileHelper = evt.getExistingFileHelper();
         generator.addProvider(true, new ModLootTableProvider(generator, ArcaneLanterns.MOD_ID));
         generator.addProvider(true, new ModRecipeProvider(generator, ArcaneLanterns.MOD_ID));
+        generator.addProvider(true, new ModBlockTagsProvider(generator, ArcaneLanterns.MOD_ID, fileHelper));
     }
 }

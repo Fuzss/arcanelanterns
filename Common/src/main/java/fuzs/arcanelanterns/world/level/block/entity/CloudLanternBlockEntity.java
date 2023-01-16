@@ -1,28 +1,29 @@
 package fuzs.arcanelanterns.world.level.block.entity;
 
+import fuzs.arcanelanterns.ArcaneLanterns;
+import fuzs.arcanelanterns.config.ServerConfig;
 import fuzs.arcanelanterns.init.ModRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-public class CloudLanternBlockEntity extends BlockEntity {
-    private int count;
+public class CloudLanternBlockEntity extends LanternBlockEntity {
 
     public CloudLanternBlockEntity(BlockPos pos, BlockState state) {
         super(ModRegistry.CLOUD_LANTERN_BLOCK_ENTITY.get(), pos, state);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, CloudLanternBlockEntity blockEntity) {
-        if (++blockEntity.count <= 10) return;
-        level.getEntities(null, new AABB(pos.getX() + 0.5 - 10, pos.getY() + 0.5 - 10, pos.getZ() + 0.5 - 10, pos.getX() + 0.5 + 10, pos.getY() + 0.5 + 10, pos.getZ() + 0.5 + 10)).forEach((entity) -> {
-            if (entity instanceof LivingEntity) {
-                ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 5 * 20, 1));
-            }
+        ServerConfig.EffectLanternConfig config = ArcaneLanterns.CONFIG.get(ServerConfig.class).cloudLantern;
+        if (++blockEntity.count <= config.delay) return;
+        final int horizontalRange = config.horizontalRange;
+        final int verticalRange = config.verticalRange;
+        level.getEntitiesOfClass(Player.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange)).forEach((entity) -> {
+            entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, config.effectDuration * 20, 0, true, true));
         });
         blockEntity.count = 0;
     }

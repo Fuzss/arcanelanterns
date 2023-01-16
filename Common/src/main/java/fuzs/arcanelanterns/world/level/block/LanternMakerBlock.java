@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -59,27 +60,34 @@ public class LanternMakerBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.getBlockEntity(pos) instanceof LanternMakerBlockEntity blockEntity) {
+            ItemStack itemInHand = player.getItemInHand(hand);
             if (!player.getItemInHand(hand).isEmpty()) {
-                if (blockEntity.items().size() < 16) {
-                    if (!level.isClientSide) {
-                        ItemStack itemInHand = player.getItemInHand(hand);
-                        if (player.getAbilities().instabuild) {
-                            itemInHand = itemInHand.copy();
-                        }
-                        blockEntity.items().add(itemInHand.split(1));
-                        blockEntity.setChanged();
-                    }
-                    return InteractionResult.sidedSuccess(level.isClientSide);
+                if (itemInHand.is(Items.LANTERN) || itemInHand.is(Items.SOUL_LANTERN)) {
+                    return InteractionResult.PASS;
                 }
-                return InteractionResult.FAIL;
-            } else if (player.isSecondaryUseActive()) {
-                if (!blockEntity.items().isEmpty()) {
-                    if (!level.isClientSide) {
-                        ItemStack lastStack = blockEntity.items().remove(blockEntity.items().size() - 1);
-                        Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5, lastStack);
-                        blockEntity.setChanged();
+                for (int i = 0; i < blockEntity.getContainerSize(); i++) {
+                    if (blockEntity.getItem(i).isEmpty()) {
+                        if (!level.isClientSide) {
+                            if (player.getAbilities().instabuild) {
+                                itemInHand = itemInHand.copy();
+                            }
+                            blockEntity.setItem(i, itemInHand.split(1));
+                            blockEntity.setChanged();
+                        }
+                        return InteractionResult.sidedSuccess(level.isClientSide);
                     }
-                    return InteractionResult.sidedSuccess(level.isClientSide);
+                }
+                return InteractionResult.CONSUME_PARTIAL;
+            } else if (player.isSecondaryUseActive()) {
+                for (int i = blockEntity.getContainerSize() - 1; i >= 0; i--) {
+                    if (!blockEntity.getItem(i).isEmpty()) {
+                        if (!level.isClientSide) {
+                            ItemStack stack = blockEntity.removeItem(i, 1);
+                            blockEntity.setChanged();
+                            LanternMakerBlockEntity.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, stack);
+                        }
+                        return InteractionResult.sidedSuccess(level.isClientSide);
+                    }
                 }
             }
         }

@@ -21,7 +21,7 @@ public record ClientboundCraftLanternParticlesMessage(BlockPos pos) implements C
             public void handle(ClientboundCraftLanternParticlesMessage message, Minecraft client, ClientPacketListener handler, LocalPlayer player, ClientLevel level) {
                 level.playLocalSound(message.pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1, 1, true);
                 for (int i = 0; i < 20; i++) {
-                    level.addParticle(ParticleTypes.END_ROD, message.pos.getX(), message.pos.getY(), message.pos.getZ(), 0.5d - level.random.nextDouble(), 0.5d - level.random.nextDouble(), 0.5d - level.random.nextDouble());
+                    level.addParticle(ParticleTypes.END_ROD, message.pos.getX() + 0.5, message.pos.getY() + 1.25, message.pos.getZ() + 0.5, 0.5 - level.random.nextDouble(), 0.5 - level.random.nextDouble(), 0.5 - level.random.nextDouble());
                 }
             }
         };

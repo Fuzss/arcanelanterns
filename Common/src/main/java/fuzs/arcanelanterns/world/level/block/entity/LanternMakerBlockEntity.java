@@ -8,22 +8,17 @@ import fuzs.puzzleslib.util.ContainerImpl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.Containers;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.LanternBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.function.Predicate;
-import java.util.stream.Stream;
+import net.minecraft.world.phys.Vec3;
 
 public class LanternMakerBlockEntity extends BlockEntity implements ContainerImpl {
     private final RecipeManager.CachedCheck<Container, LanternMakingRecipe> quickCheck;
@@ -35,44 +30,28 @@ public class LanternMakerBlockEntity extends BlockEntity implements ContainerImp
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, LanternMakerBlockEntity blockEntity) {
-        if (level.getBlockState(pos.above()).getBlock() instanceof LanternBlock) {
-            ItemStack[] stacks = getRecipeStacks(blockEntity);
-            if (stacks.length > 0) {
-                ItemStack result = assembleRecipe(level, blockEntity, stacks);
-                if (attemptCrafting(level, pos, blockEntity, stacks, result)) {
-                    return;
+        BlockState above = level.getBlockState(pos.above());
+        if (above.is(Blocks.LANTERN) || above.is(Blocks.SOUL_LANTERN)) {
+            ItemStack result = blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(recipe -> recipe.assemble(blockEntity)).orElse(ItemStack.EMPTY);
+            if (!result.isEmpty()) {
+                for (ItemStack stack : blockEntity.items) {
+                    if (!stack.isEmpty()) stack.shrink(1);
                 }
-            }
-            level.destroyBlock(pos.above(), true);
-        }
-    }
-
-    private static ItemStack[] getRecipeStacks(LanternMakerBlockEntity blockEntity) {
-        if (!blockEntity.items.isEmpty()) {
-            ItemStack[] itemStacks = blockEntity.items.stream().filter(Predicate.not(ItemStack::isEmpty)).toArray(ItemStack[]::new);
-            if (itemStacks.length > 0) {
-                return itemStacks;
+                blockEntity.setChanged();
+                level.destroyBlock(pos.above(), false);
+                dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result);
+                ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundCraftLanternParticlesMessage(pos), pos, level);
+            } else {
+                level.destroyBlock(pos.above(), true);
             }
         }
-        return new ItemStack[0];
     }
 
-    private static ItemStack assembleRecipe(Level level, LanternMakerBlockEntity blockEntity, ItemStack[] itemStacks) {
-        Container container = new SimpleContainer(itemStacks);
-        return blockEntity.quickCheck.getRecipeFor(container, level).map(recipe -> recipe.assemble(container)).orElse(ItemStack.EMPTY);
-    }
-
-    private static boolean attemptCrafting(Level level, BlockPos pos, LanternMakerBlockEntity blockEntity, ItemStack[] itemStacks, ItemStack result) {
-        if (!result.isEmpty()) {
-            itemStacks = Stream.of(itemStacks).peek(stack -> stack.shrink(1)).filter(Predicate.not(ItemStack::isEmpty)).toArray(ItemStack[]::new);
-            blockEntity.items = NonNullList.of(ItemStack.EMPTY, itemStacks);
-            blockEntity.setChanged();
-            level.destroyBlock(pos.above(), false);
-            Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5, result);
-            ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundCraftLanternParticlesMessage(pos.above()), pos, level);
-            return true;
-        }
-        return false;
+    public static void dropItemStack(Level level, double posX, double posY, double posZ, ItemStack stack) {
+        ItemEntity itemEntity = new ItemEntity(level, posX, posY, posZ, stack);
+        itemEntity.setDeltaMovement(Vec3.ZERO);
+        itemEntity.setDefaultPickUpDelay();
+        level.addFreshEntity(itemEntity);
     }
 
     @Override
