@@ -6,15 +6,15 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+@SuppressWarnings("deprecation")
 public class SparkBlock extends Block {
+    private static final VoxelShape SHAPE = Shapes.box(0.4, 0.4, 0.4, 0.6, 0.6, 0.6);
 
     public SparkBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -22,7 +22,7 @@ public class SparkBlock extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return Shapes.box(0.4, 0.4, 0.4, 0.6, 0.6, 0.6);
+        return SHAPE;
     }
 
     @Override

@@ -1,0 +1,26 @@
+{
+  "type": "arcanelanterns:lantern_making",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "minecraft:golden_carrot"
+    },
+    {
+      "item": "minecraft:beetroot"
+    },
+    {
+      "item": "arcanelanterns:life_lantern"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    }
+  ],
+  "result": {
+    "item": "arcanelanterns:love_lantern"
+  }
+}

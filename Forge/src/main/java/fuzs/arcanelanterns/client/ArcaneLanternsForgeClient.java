@@ -3,9 +3,13 @@ package fuzs.arcanelanterns.client;
 import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.init.ModRegistry;
 import fuzs.puzzleslib.client.core.ClientFactories;
+import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -35,5 +39,11 @@ public class ArcaneLanternsForgeClient {
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.CONTAINING_LANTERN_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.WITHERING_LANTERN_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModRegistry.CLOUD_LANTERN_BLOCK.get(), RenderType.cutout());
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRecipeBookCategories(final RegisterRecipeBookCategoriesEvent evt) {
+//        RecipeBookCategories na = RecipeBookCategories.create("na", new ItemStack(Items.LANTERN));
+        evt.registerRecipeCategoryFinder(ModRegistry.LANTERN_MAKING_RECIPE_TYPE.get(), recipe -> RecipeBookCategories.CAMPFIRE);
     }
 }

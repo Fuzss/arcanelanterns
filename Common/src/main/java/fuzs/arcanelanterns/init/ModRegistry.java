@@ -1,6 +1,7 @@
 package fuzs.arcanelanterns.init;
 
 import fuzs.arcanelanterns.ArcaneLanterns;
+import fuzs.arcanelanterns.world.item.crafting.LanternMakingRecipe;
 import fuzs.arcanelanterns.world.level.block.*;
 import fuzs.arcanelanterns.world.level.block.entity.*;
 import fuzs.puzzleslib.core.CommonAbstractions;
@@ -8,9 +9,12 @@ import fuzs.puzzleslib.core.CommonFactories;
 import fuzs.puzzleslib.init.RegistryManager;
 import fuzs.puzzleslib.init.RegistryReference;
 import fuzs.puzzleslib.init.builder.ModBlockEntityTypeBuilder;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -44,6 +48,15 @@ public class ModRegistry {
     public static final RegistryReference<BlockEntityType<ContainingLanternBlockEntity>> CONTAINING_LANTERN_BLOCK_ENTITY = REGISTRY.registerBlockEntityTypeBuilder("containing_lantern", () -> ModBlockEntityTypeBuilder.of(ContainingLanternBlockEntity::new, CONTAINING_LANTERN_BLOCK.get()));
     public static final RegistryReference<BlockEntityType<WitheringLanternBlockEntity>> WITHERING_LANTERN_BLOCK_ENTITY = REGISTRY.registerBlockEntityTypeBuilder("withering_lantern", () -> ModBlockEntityTypeBuilder.of(WitheringLanternBlockEntity::new, WITHERING_LANTERN_BLOCK.get()));
     public static final RegistryReference<BlockEntityType<CloudLanternBlockEntity>> CLOUD_LANTERN_BLOCK_ENTITY = REGISTRY.registerBlockEntityTypeBuilder("cloud_lantern", () -> ModBlockEntityTypeBuilder.of(CloudLanternBlockEntity::new, CLOUD_LANTERN_BLOCK.get()));
+    public static final RegistryReference<RecipeType<LanternMakingRecipe>> LANTERN_MAKING_RECIPE_TYPE = REGISTRY.register(Registry.RECIPE_TYPE_REGISTRY, "lantern_making", () -> new RecipeType<>() {
+
+        @Override
+        public String toString() {
+            // TODO replace in new puzzles version
+            return "arcanelanterns:lantern_making";
+        }
+    });
+    public static final RegistryReference<RecipeSerializer<LanternMakingRecipe>> LANTERN_MAKING_RECIPE_SERIALIZER = REGISTRY.register(Registry.RECIPE_SERIALIZER_REGISTRY, "lantern_making", () -> new LanternMakingRecipe.Serializer());
 
     public static void touch() {
 

@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -23,7 +24,12 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class LanternMakerBlock extends BaseEntityBlock {
+    public static final VoxelShape TOP_SHAPE = Block.box(1.0, 12.0, 1.0, 15.0, 16.0, 15.0);
+    public static final VoxelShape CENTER_SHAPE = Block.box(5.0, 2.0, 5.0, 11.0, 12.0, 11.0);
+    public static final VoxelShape BASE_SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 2.0, 13.0);
+    public static final VoxelShape FULL_SHAPE = Shapes.or(TOP_SHAPE, CENTER_SHAPE, BASE_SHAPE);
 
     public LanternMakerBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -47,33 +53,33 @@ public class LanternMakerBlock extends BaseEntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return Shapes.box(0.01, 0, 0.01, 0.99, 1, 0.99);
+        return FULL_SHAPE;
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.getBlockEntity(pos) instanceof LanternMakerBlockEntity blockEntity) {
             if (!player.getItemInHand(hand).isEmpty()) {
-                for (int i = 0; i < blockEntity.getContainerSize(); i++) {
-                    if (blockEntity.getItem(i).isEmpty()) {
-                        if (!level.isClientSide) {
-                            blockEntity.setItem(i, player.getItemInHand(hand).copy());
-                            blockEntity.setChanged();
-                            player.getItemInHand(hand).setCount(0);
+                if (blockEntity.items().size() < 16) {
+                    if (!level.isClientSide) {
+                        ItemStack itemInHand = player.getItemInHand(hand);
+                        if (player.getAbilities().instabuild) {
+                            itemInHand = itemInHand.copy();
                         }
-                        return InteractionResult.sidedSuccess(level.isClientSide);
+                        blockEntity.items().add(itemInHand.split(1));
+                        blockEntity.setChanged();
                     }
+                    return InteractionResult.sidedSuccess(level.isClientSide);
                 }
+                return InteractionResult.FAIL;
             } else if (player.isSecondaryUseActive()) {
-                for (int i = blockEntity.getContainerSize() - 1; i > -1; i--) {
-                    if (!blockEntity.getItem(i).isEmpty()) {
-                        if (!level.isClientSide) {
-                            blockEntity.setItem(i, ItemStack.EMPTY);
-                            blockEntity.setChanged();
-                            player.setItemInHand(hand, blockEntity.getItem(i).copy());
-                        }
-                        return InteractionResult.sidedSuccess(level.isClientSide);
+                if (!blockEntity.items().isEmpty()) {
+                    if (!level.isClientSide) {
+                        ItemStack lastStack = blockEntity.items().remove(blockEntity.items().size() - 1);
+                        Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5, lastStack);
+                        blockEntity.setChanged();
                     }
+                    return InteractionResult.sidedSuccess(level.isClientSide);
                 }
             }
         }
