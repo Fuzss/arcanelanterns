@@ -1,5 +1,6 @@
 {
   "itemGroup.arcanelanterns.main" : "Arcane Lanterns",
+  "recipe_type.arcanelanterns.lantern_making" : "Lantern Making",
   "block.arcanelanterns.lantern_maker" : "Lantern Maker",
   "block.arcanelanterns.life_lantern" : "Life Lantern",
   "block.arcanelanterns.feral_lantern" : "Feral Lantern",

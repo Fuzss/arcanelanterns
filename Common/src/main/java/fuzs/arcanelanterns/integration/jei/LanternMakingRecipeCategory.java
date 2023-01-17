@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * a lot of this code comes from Botania's runic altar
+ * Some of this code comes from Botania's runic altar, mainly the method for evenly placing recipe ingredients in a circle around a center point.
  * <p><a href="https://github.com/VazkiiMods/Botania/blob/1.19.x/Xplat/src/main/java/vazkii/botania/client/integration/jei/RunicAltarRecipeCategory.java">RunicAltarRecipeCategory.java</a>
  */
 public class LanternMakingRecipeCategory implements IRecipeCategory<LanternMakingRecipe> {
@@ -33,7 +33,7 @@ public class LanternMakingRecipeCategory implements IRecipeCategory<LanternMakin
     private final List<ItemStack> lanternStacks;
 
     public LanternMakingRecipeCategory(IGuiHelper guiHelper) {
-        this.title = ModRegistry.LANTERN_MAKER_BLOCK.get().getName();
+        this.title = Component.translatable("recipe_type.arcanelanterns.lantern_making");
         this.background = guiHelper.createDrawable(ArcaneLanterns.id("textures/gui/lantern_making_background.png"), 0, 0, 161, 86);
         this.lanternMakerStack = new ItemStack(ModRegistry.LANTERN_MAKER_BLOCK.get());
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.lanternMakerStack);

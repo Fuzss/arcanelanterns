@@ -62,19 +62,21 @@ public class LanternMakerBlock extends BaseEntityBlock {
         if (level.getBlockEntity(pos) instanceof LanternMakerBlockEntity blockEntity) {
             ItemStack itemInHand = player.getItemInHand(hand);
             if (!player.getItemInHand(hand).isEmpty()) {
-                if (itemInHand.is(Items.LANTERN) || itemInHand.is(Items.SOUL_LANTERN)) {
-                    return InteractionResult.PASS;
-                }
-                for (int i = 0; i < blockEntity.getContainerSize(); i++) {
-                    if (blockEntity.getItem(i).isEmpty()) {
-                        if (!level.isClientSide) {
-                            if (player.getAbilities().instabuild) {
-                                itemInHand = itemInHand.copy();
+                if (level.getBlockState(pos.above()).isAir()) {
+                    if (itemInHand.is(Items.LANTERN) || itemInHand.is(Items.SOUL_LANTERN)) {
+                        return InteractionResult.PASS;
+                    }
+                    for (int i = 0; i < blockEntity.getContainerSize(); i++) {
+                        if (blockEntity.getItem(i).isEmpty()) {
+                            if (!level.isClientSide) {
+                                if (player.getAbilities().instabuild) {
+                                    itemInHand = itemInHand.copy();
+                                }
+                                blockEntity.setItem(i, itemInHand.split(1));
+                                blockEntity.setChanged();
                             }
-                            blockEntity.setItem(i, itemInHand.split(1));
-                            blockEntity.setChanged();
+                            return InteractionResult.sidedSuccess(level.isClientSide);
                         }
-                        return InteractionResult.sidedSuccess(level.isClientSide);
                     }
                 }
                 return InteractionResult.CONSUME_PARTIAL;
