@@ -7,6 +7,7 @@ import fuzs.arcanelanterns.networking.ClientboundBorealParticlesMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +24,7 @@ public class BorealLanternBlockEntity extends LanternBlockEntity {
         if (++blockEntity.count <= config.delay) return;
         final int horizontalRange = config.horizontalRange;
         final int verticalRange = config.verticalRange;
-        level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange)).forEach((entity) -> {
+        level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), EntitySelector.NO_CREATIVE_OR_SPECTATOR).forEach((entity) -> {
             entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, config.effectDuration * 20, 3));
             entity.setRemainingFireTicks(0);
             ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundBorealParticlesMessage(pos, entity.blockPosition()), entity.blockPosition(), level);

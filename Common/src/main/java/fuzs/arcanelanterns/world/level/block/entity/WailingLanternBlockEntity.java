@@ -7,6 +7,7 @@ import fuzs.arcanelanterns.networking.ClientboundWailingSoundsMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +24,7 @@ public class WailingLanternBlockEntity extends LanternBlockEntity {
         if (++blockEntity.count <= config.delay) return;
         final int horizontalRange = config.horizontalRange;
         final int verticalRange = config.verticalRange;
-        level.getEntitiesOfClass(Player.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange)).forEach((player) -> {
+        level.getEntitiesOfClass(Player.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), EntitySelector.NO_SPECTATORS).forEach((player) -> {
             if (!player.blockPosition().closerThan(pos, 5)) {
                 ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundWailingSoundsMessage(pos, false), pos, level);
             } else {

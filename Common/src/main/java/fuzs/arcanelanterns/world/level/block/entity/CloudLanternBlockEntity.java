@@ -6,6 +6,7 @@ import fuzs.arcanelanterns.init.ModRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +23,7 @@ public class CloudLanternBlockEntity extends LanternBlockEntity {
         if (++blockEntity.count <= config.delay) return;
         final int horizontalRange = config.horizontalRange;
         final int verticalRange = config.verticalRange;
-        level.getEntitiesOfClass(Player.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange)).forEach((entity) -> {
+        level.getEntitiesOfClass(Player.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), EntitySelector.NO_SPECTATORS).forEach((entity) -> {
             entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, config.effectDuration * 20, 0, true, true));
         });
         blockEntity.count = 0;
