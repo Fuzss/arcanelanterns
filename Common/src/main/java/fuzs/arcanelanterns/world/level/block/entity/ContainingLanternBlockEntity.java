@@ -3,7 +3,7 @@ package fuzs.arcanelanterns.world.level.block.entity;
 import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.config.ServerConfig;
 import fuzs.arcanelanterns.init.ModRegistry;
-import fuzs.arcanelanterns.networking.ClientboundContainingSoundsMessage;
+import fuzs.arcanelanterns.network.ClientboundContainingSoundsMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

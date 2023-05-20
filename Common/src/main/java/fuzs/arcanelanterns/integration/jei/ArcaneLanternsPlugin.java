@@ -3,7 +3,7 @@ package fuzs.arcanelanterns.integration.jei;
 import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.init.ModRegistry;
 import fuzs.arcanelanterns.world.item.crafting.LanternMakingRecipe;
-import fuzs.puzzleslib.proxy.Proxy;
+import fuzs.puzzleslib.api.core.v1.Proxy;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;

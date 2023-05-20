@@ -3,7 +3,7 @@ package fuzs.arcanelanterns.world.level.block.entity;
 import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.config.ServerConfig;
 import fuzs.arcanelanterns.init.ModRegistry;
-import fuzs.arcanelanterns.networking.ClientboundBorealParticlesMessage;
+import fuzs.arcanelanterns.network.ClientboundBorealParticlesMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

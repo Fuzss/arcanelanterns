@@ -2,9 +2,9 @@ package fuzs.arcanelanterns.world.level.block.entity;
 
 import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.init.ModRegistry;
-import fuzs.arcanelanterns.networking.ClientboundCraftLanternParticlesMessage;
+import fuzs.arcanelanterns.network.ClientboundCraftLanternParticlesMessage;
 import fuzs.arcanelanterns.world.item.crafting.LanternMakingRecipe;
-import fuzs.puzzleslib.util.ContainerImpl;
+import fuzs.puzzleslib.api.container.v1.ContainerImpl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;

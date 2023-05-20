@@ -7,9 +7,11 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
@@ -27,7 +29,7 @@ class LanternMakingRecipeBuilder extends ShapelessRecipeBuilder {
     private String group;
 
     public LanternMakingRecipeBuilder(ItemLike result, int count) {
-        super(result, count);
+        super(RecipeCategory.MISC, result, count);
         this.result = result.asItem();
         this.count = count;
     }
@@ -70,7 +72,7 @@ class LanternMakingRecipeBuilder extends ShapelessRecipeBuilder {
     public void save(Consumer<FinishedRecipe> finishedRecipeConsumer, ResourceLocation recipeId) {
         this.ensureValid(recipeId);
         this.advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId)).rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(recipeId)).requirements(RequirementsStrategy.OR);
-        finishedRecipeConsumer.accept(new Result(recipeId, this.result, this.count, this.group == null ? "" : this.group, this.ingredients, this.advancement, new ResourceLocation(recipeId.getNamespace(), "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + recipeId.getPath())));
+        finishedRecipeConsumer.accept(new Result(recipeId, this.result, this.count, this.group == null ? "" : this.group, this.ingredients, this.advancement, new ResourceLocation(recipeId.getNamespace(), "recipes/" + RecipeCategory.MISC.getFolderName() + "/" + recipeId.getPath())));
     }
 
     private void ensureValid(ResourceLocation id) {
@@ -82,7 +84,7 @@ class LanternMakingRecipeBuilder extends ShapelessRecipeBuilder {
     static class Result extends ShapelessRecipeBuilder.Result {
 
         public Result(ResourceLocation id, Item result, int count, String group, List<Ingredient> ingredients, Advancement.Builder advancement, ResourceLocation advancementId) {
-            super(id, result, count, group, ingredients, advancement, advancementId);
+            super(id, result, count, group, CraftingBookCategory.MISC, ingredients, advancement, advancementId);
         }
 
         @Override

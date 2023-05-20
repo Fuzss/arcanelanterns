@@ -2,7 +2,7 @@ package fuzs.arcanelanterns.client;
 
 import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.init.ModRegistry;
-import fuzs.puzzleslib.client.core.ClientFactories;
+import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
@@ -17,7 +17,7 @@ public class ArcaneLanternsForgeClient {
 
     @SubscribeEvent
     public static void onConstructMod(final FMLConstructModEvent evt) {
-        ClientFactories.INSTANCE.clientModConstructor(ArcaneLanterns.MOD_ID).accept(new ArcaneLanternsClient());
+        ClientModConstructor.construct(ArcaneLanterns.MOD_ID, ArcaneLanternsClient::new);
     }
 
     @SubscribeEvent

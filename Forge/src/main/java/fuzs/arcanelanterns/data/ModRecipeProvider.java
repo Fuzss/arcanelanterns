@@ -1,10 +1,13 @@
 package fuzs.arcanelanterns.data;
 
 import fuzs.arcanelanterns.init.ModRegistry;
+import fuzs.puzzleslib.api.data.v1.AbstractRecipeProvider;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
@@ -12,17 +15,15 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
-public class ModRecipeProvider extends RecipeProvider {
-    private final String modId;
+public class ModRecipeProvider extends AbstractRecipeProvider {
 
-    public ModRecipeProvider(DataGenerator dataGenerator, String modId) {
-        super(dataGenerator);
-        this.modId = modId;
+    public ModRecipeProvider(PackOutput packOutput) {
+        super(packOutput);
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(ModRegistry.LANTERN_MAKER_BLOCK.get())
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModRegistry.LANTERN_MAKER_BLOCK.get())
                 .define('X', Items.DIAMOND)
                 .define('#', Items.POLISHED_BASALT)
                 .pattern("#X#")

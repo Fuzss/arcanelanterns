@@ -1,9 +1,8 @@
 package fuzs.arcanelanterns.client.renderer.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import fuzs.arcanelanterns.world.level.block.entity.LanternMakerBlockEntity;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -37,9 +36,9 @@ public class LanternMakerRenderer implements BlockEntityRenderer<LanternMakerBlo
             if (!items.get(i).isEmpty()) {
                 matrices.pushPose();
                 matrices.translate(0.5F, 1.15F, 0.5F);
-                matrices.mulPose(Vector3f.YP.rotationDegrees(i * itemRenderAngle + totalTicks));
+                matrices.mulPose(Axis.YP.rotationDegrees(i * itemRenderAngle + totalTicks));
                 matrices.translate(0.75F, 0.0F, 0.25F);
-                matrices.mulPose(Vector3f.YP.rotationDegrees(totalTicks % 360.0F));
+                matrices.mulPose(Axis.YP.rotationDegrees(totalTicks % 360.0F));
                 matrices.translate(0.0, 0.075 * Math.sin((totalTicks + i * 10.0) / 5.0), 0.0F);
                 this.itemRenderer.renderStatic(items.get(i), ItemTransforms.TransformType.GROUND, light, overlay, matrices, vertexConsumers, posData + i);
                 matrices.popPose();

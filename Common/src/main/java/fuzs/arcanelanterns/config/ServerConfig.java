@@ -1,10 +1,10 @@
 package fuzs.arcanelanterns.config;
 
 import com.google.common.collect.Lists;
-import fuzs.puzzleslib.config.ConfigCore;
-import fuzs.puzzleslib.config.annotation.Config;
-import fuzs.puzzleslib.config.serialization.ConfigDataSet;
-import net.minecraft.core.Registry;
+import fuzs.puzzleslib.api.config.v3.Config;
+import fuzs.puzzleslib.api.config.v3.ConfigCore;
+import fuzs.puzzleslib.api.config.v3.serialization.ConfigDataSet;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 
 import java.util.List;
@@ -74,7 +74,7 @@ public class ServerConfig implements ConfigCore {
 
         @Override
         public void afterConfigReload() {
-            this.blacklist = ConfigDataSet.of(Registry.ENTITY_TYPE_REGISTRY, this.blacklistRaw);
+            this.blacklist = ConfigDataSet.from(Registries.ENTITY_TYPE, this.blacklistRaw);
         }
     }
 
