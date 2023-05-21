@@ -12,12 +12,10 @@ import java.util.List;
 public class ServerConfig implements ConfigCore {
     @Config(description = "Allow falling at normal speed while the slow falling effect is active when sneaking. The player will still not take any fall damage.")
     public boolean slowFallingQuickDescent = true;
-    @Config(description = "Show heart particles as long as an animal can breed after it has been fed.")
-    public boolean permanentBreedingHearts = true;
     @Config
     public EffectLanternConfig borealLantern = new EffectLanternConfig(2, 10, 10, 5);
     @Config
-    public BriliantLanternConfig briliantLantern = new BriliantLanternConfig(20, 4, 4);
+    public BrilliantLanternConfig brilliantLantern = new BrilliantLanternConfig(20, 4, 4);
     @Config
     public EffectLanternConfig cloudLantern = new EffectLanternConfig(80, 10, 10, 9);
     @Config
@@ -62,13 +60,13 @@ public class ServerConfig implements ConfigCore {
         }
     }
 
-    public static class BriliantLanternConfig extends LanternConfig {
+    public static class BrilliantLanternConfig extends LanternConfig {
         @Config(name = "blacklist", description = {"Animals the briliant lantern will not turn into experience.", ConfigDataSet.CONFIG_DESCRIPTION})
         List<String> blacklistRaw = Lists.newArrayList();
 
         public ConfigDataSet<EntityType<?>> blacklist;
 
-        public BriliantLanternConfig(int delay, int horizontalRange, int verticalRange) {
+        public BrilliantLanternConfig(int delay, int horizontalRange, int verticalRange) {
             super(delay, horizontalRange, verticalRange);
         }
 
@@ -91,7 +89,7 @@ public class ServerConfig implements ConfigCore {
     public static class FeralLanternConfig extends LanternConfig {
         @Config(description = "The maximum amount of flares the feral lamp will place before destroying itself.")
         @Config.IntRange(min = 1, max = 9999)
-        public int maxPlacedFlares = 100;
+        public int maxPlacedFlares = 40;
         @Config(description = "The maximum light level at a checked position where the feral lamp will place a flare.")
         @Config.IntRange(min = 0, max = 15)
         public int maxLightLevel = 5;

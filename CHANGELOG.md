@@ -5,5 +5,7 @@ The format is based on [Keep a Changelog].
 
 ## [v5.0.0-1.19.3] - 2023-05-20
 - Ported to Minecraft 1.19.3
+### Changed
+- Overhauled feral lantern spark placement mechanic
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/

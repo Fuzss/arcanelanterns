@@ -60,10 +60,10 @@ public class ModModelProvider extends AbstractModelProvider {
     }
 
     public BlockModelBuilder lantern(String fileName, ResourceLocation texture) {
-        return this.models().singleTexture(fileName, this.mcLoc(ModelProvider.BLOCK_FOLDER + "/template_lantern"), texture);
+        return this.models().singleTexture(fileName, this.mcLoc(ModelProvider.BLOCK_FOLDER + "/template_lantern"), "lantern", texture);
     }
 
     public BlockModelBuilder hangingLantern(String fileName, ResourceLocation texture) {
-        return this.models().singleTexture(fileName, this.mcLoc(ModelProvider.BLOCK_FOLDER + "/template_hanging_lantern"), texture);
+        return this.models().singleTexture(fileName, this.mcLoc(ModelProvider.BLOCK_FOLDER + "/template_hanging_lantern"), "lantern", texture);
     }
 }

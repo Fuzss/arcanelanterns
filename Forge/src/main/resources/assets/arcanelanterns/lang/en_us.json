@@ -14,7 +14,7 @@
   "block.arcanelanterns.cloud_lantern" : "Cloud Lantern",
   "block.arcanelanterns.lantern_maker.info": "To imbue a lantern the lantern maker will require a number of catalysts. Finally, place a lantern block on top to fuse everything together.",
   "block.arcanelanterns.life_lantern.info": "Makes crops around the lantern grow faster.",
-  "block.arcanelanterns.feral_lantern.info": "Lights up a giant area around it by spawning sparks. When the area is lit up and enough sparks have been spawned the lantern vanishes.",
+  "block.arcanelanterns.feral_lantern.info": "Lights up a giant area around it by spawning sparks. When enough sparks have been spawned the lantern stops. Sparks will stay in the world while the lantern exists at the original position.",
   "block.arcanelanterns.love_lantern.info": "Makes nearby mobs fall in love.",
   "block.arcanelanterns.wailing_lantern.info": "Cries if you get close, screams and applies nausea if you get even closer.",
   "block.arcanelanterns.boreal_lantern.info": "Slows nearby mobs and players down, also extinguishes burning mobs.",

@@ -3,11 +3,16 @@ package fuzs.arcanelanterns.world.level.block;
 import fuzs.arcanelanterns.init.ModRegistry;
 import fuzs.arcanelanterns.world.level.block.entity.FeralLanternBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class FeralLanternBlock extends LanternEntityBlock {
@@ -25,5 +30,21 @@ public class FeralLanternBlock extends LanternEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new FeralLanternBlockEntity(pos, state);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            if (level.getBlockEntity(pos) instanceof FeralLanternBlockEntity blockEntity) {
+                if (blockEntity.isDonePlacing()) {
+                    level.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, pos, 0);
+                } else {
+                    level.levelEvent(LevelEvent.LAVA_FIZZ, pos.below(), 0);
+                }
+            }
+            return InteractionResult.CONSUME;
+        }
     }
 }

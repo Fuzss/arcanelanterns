@@ -1,21 +1,20 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "arcanelanterns:block/feral_lantern",
+		"texture": "arcanelanterns:block/feral_lantern",
 		"particle": "arcanelanterns:block/feral_lantern"
 	},
 	"elements": [
 		{
-			"from": [6.5, 6.5, 6.5],
-			"to": [9.5, 9.5, 9.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [15.5, 15.5, 15.5]},
+			"from": [6, 6, 6],
+			"to": [10, 10, 10],
 			"faces": {
-				"north": {"uv": [0, 3, 6, 8], "texture": "#0"},
-				"east": {"uv": [0, 3, 6, 8], "texture": "#0"},
-				"south": {"uv": [0, 3, 6, 8], "texture": "#0"},
-				"west": {"uv": [0, 3, 6, 8], "texture": "#0"},
-				"up": {"uv": [0, 3, 6, 8], "texture": "#0"},
-				"down": {"uv": [0, 3, 6, 8], "texture": "#0"}
+				"north": {"uv": [1, 4, 5, 8], "texture": "#texture"},
+				"east": {"uv": [1, 4, 5, 8], "texture": "#texture"},
+				"south": {"uv": [1, 4, 5, 8], "texture": "#texture"},
+				"west": {"uv": [1, 4, 5, 8], "texture": "#texture"},
+				"up": {"uv": [1, 4, 5, 8], "texture": "#texture"},
+				"down": {"uv": [1, 4, 5, 8], "texture": "#texture"}
 			}
 		}
 	]

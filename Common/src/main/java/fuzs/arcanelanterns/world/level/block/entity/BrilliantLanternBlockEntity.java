@@ -15,18 +15,18 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class BriliantLanternBlockEntity extends LanternBlockEntity {
+public class BrilliantLanternBlockEntity extends LanternBlockEntity {
 
-    public BriliantLanternBlockEntity(BlockPos pos, BlockState state) {
-        super(ModRegistry.BRILIANT_LANTERN_BLOCK_ENTITY.get(), pos, state);
+    public BrilliantLanternBlockEntity(BlockPos pos, BlockState state) {
+        super(ModRegistry.BRILLIANT_LANTERN_BLOCK_ENTITY.get(), pos, state);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, BriliantLanternBlockEntity blockEntity) {
-        ServerConfig.BriliantLanternConfig config = ArcaneLanterns.CONFIG.get(ServerConfig.class).briliantLantern;
+    public static void tick(Level level, BlockPos pos, BlockState state, BrilliantLanternBlockEntity blockEntity) {
+        ServerConfig.BrilliantLanternConfig config = ArcaneLanterns.CONFIG.get(ServerConfig.class).brilliantLantern;
         if (++blockEntity.count <= config.delay) return;
         final int horizontalRange = config.horizontalRange;
         final int verticalRange = config.verticalRange;
-        List<Animal> animals = level.getEntitiesOfClass(Animal.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), BriliantLanternBlockEntity::isValidAnimal);
+        List<Animal> animals = level.getEntitiesOfClass(Animal.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), BrilliantLanternBlockEntity::isValidAnimal);
         if (!animals.isEmpty()) {
             Animal animal = animals.get(0);
             // make sure equipment still drops, but nothing else
@@ -39,7 +39,7 @@ public class BriliantLanternBlockEntity extends LanternBlockEntity {
     }
 
     private static boolean isValidAnimal(Animal animal) {
-        return animal.shouldDropExperience() && (!(animal instanceof TamableAnimal tamableAnimal) || !tamableAnimal.isTame()) && !ArcaneLanterns.CONFIG.get(ServerConfig.class).briliantLantern.blacklist.contains(animal.getType());
+        return animal.shouldDropExperience() && (!(animal instanceof TamableAnimal tamableAnimal) || !tamableAnimal.isTame()) && !ArcaneLanterns.CONFIG.get(ServerConfig.class).brilliantLantern.blacklist.contains(animal.getType());
     }
 
     private static void killWithoutLoot(Level level, LivingEntity entity) {

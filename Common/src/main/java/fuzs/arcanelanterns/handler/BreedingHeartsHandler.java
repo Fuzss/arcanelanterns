@@ -11,7 +11,8 @@ import net.minecraft.world.entity.animal.Animal;
 public class BreedingHeartsHandler {
 
     public static EventResult onLivingUpdate(LivingEntity entity) {
-        if (!ArcaneLanterns.CONFIG.get(ServerConfig.class).permanentBreedingHearts) return EventResult.PASS;
+        // fixes a vanilla bug where breeding hearts will only spawn once around a mob in love instead of continuing to appear
+        // this fix was lying around anyway, and it kinda fits with the love lantern, so it is included in this mod
         if (!entity.level.isClientSide &&  entity instanceof Animal animal) {
             if (animal.getInLoveTime() > 0 && animal.getInLoveTime() % 10 == 0) {
                 double posX = animal.getRandom().nextGaussian() * 0.02;
