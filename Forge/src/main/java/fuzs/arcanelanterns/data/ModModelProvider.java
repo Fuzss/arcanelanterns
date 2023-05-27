@@ -36,16 +36,6 @@ public class ModModelProvider extends AbstractModelProvider {
         }
     }
 
-    private void simpleExistingBlock(Block block) {
-        this.simpleBlock(block, new ModelFile.ExistingModelFile(this.blockTexture(block), this.models().existingFileHelper));
-    }
-
-    private void simpleExistingBlockWithItem(Block block) {
-        ModelFile.ExistingModelFile model = new ModelFile.ExistingModelFile(this.blockTexture(block), this.models().existingFileHelper);
-        this.simpleBlock(block, model);
-        this.simpleBlockItem(block, model);
-    }
-
     public void lanternBlock(Block block) {
         ModelFile lantern = this.lantern(this.name(block), this.blockTexture(block));
         ModelFile hangingLantern = this.hangingLantern("hanging_" + this.name(block), this.blockTexture(block));

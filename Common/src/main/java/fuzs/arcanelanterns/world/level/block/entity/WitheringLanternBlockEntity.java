@@ -24,7 +24,7 @@ public class WitheringLanternBlockEntity extends LanternBlockEntity {
         if (++blockEntity.count <= config.delay) return;
         final int horizontalRange = config.horizontalRange;
         final int verticalRange = config.verticalRange;
-        level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), entity -> !(entity instanceof Player) && !entity.isInvulnerableTo(DamageSource.WITHER)).forEach((entity) -> {
+        level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), entity -> !(entity instanceof Player) && !entity.isInvulnerableTo(level.damageSources().wither())).forEach((entity) -> {
             entity.addEffect(new MobEffectInstance(MobEffects.WITHER, config.effectDuration * 20, 0));
         });
         blockEntity.count = 0;

@@ -29,7 +29,7 @@ public class ContainingLanternBlockEntity extends LanternBlockEntity {
                 } else {
                     entity.teleportToWithTicket(pos.getX(), pos.getY() - 1, pos.getZ());
                 }
-                ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundContainingSoundsMessage(pos), pos, level);
+                ArcaneLanterns.NETWORK.sendToAllNear(pos, level, new ClientboundContainingSoundsMessage(pos));
             }
         });
         blockEntity.count = 0;

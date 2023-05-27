@@ -22,7 +22,7 @@ public class LifeLanternBlockEntity extends LanternBlockEntity {
         if (++blockEntity.count <= config.delay) return;
         final int horizontalRange = config.horizontalRange;
         final int verticalRange = config.verticalRange;
-        BlockPos targetPos = pos.offset(level.random.nextInt(horizontalRange * 2) - horizontalRange, level.random.nextInt(verticalRange * 2) - verticalRange, (double) level.random.nextInt(horizontalRange * 2) - horizontalRange);
+        BlockPos targetPos = pos.offset(level.random.nextInt(horizontalRange * 2) - horizontalRange, level.random.nextInt(verticalRange * 2) - verticalRange, level.random.nextInt(horizontalRange * 2) - horizontalRange);
         while (!(level.getBlockState(targetPos).getBlock() instanceof BonemealableBlock) && targetPos.closerThan(pos, 6.0)) {
             targetPos = targetPos.subtract(new Vec3i(0, 1, 0));
         }

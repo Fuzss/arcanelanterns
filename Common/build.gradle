@@ -12,11 +12,11 @@ dependencies {
     minecraft "com.mojang:minecraft:${minecraftVersion}"
     mappings loom.layered() {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${minecraftVersion}:${parchmentMappingsVersion}@zip")
+//        parchment("org.parchmentmc.data:parchment-${minecraftVersion}:${parchmentMappingsVersion}@zip")
     }
 
     // Just Enough Items
-    api "mezz.jei:jei-1.19.3-common-api:12.4.0.22"
+    api "mezz.jei:jei-1.19.4-common-api:13.1.0.11"
 
     // Puzzles Lib
     modApi "fuzs.puzzleslib:puzzleslib-common:${puzzlesVersion}"

@@ -26,10 +26,10 @@ public class WailingLanternBlockEntity extends LanternBlockEntity {
         final int verticalRange = config.verticalRange;
         level.getEntitiesOfClass(Player.class, new AABB(pos.getX() + 0.5 - horizontalRange, pos.getY() + 0.5 - verticalRange, pos.getZ() + 0.5 - horizontalRange, pos.getX() + 0.5 + horizontalRange, pos.getY() + 0.5 + verticalRange, pos.getZ() + 0.5 + horizontalRange), EntitySelector.NO_CREATIVE_OR_SPECTATOR).forEach((player) -> {
             if (!player.blockPosition().closerThan(pos, 5)) {
-                ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundWailingSoundsMessage(pos, false), pos, level);
+                ArcaneLanterns.NETWORK.sendToAllNear(pos, level, new ClientboundWailingSoundsMessage(pos, false));
             } else {
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, config.effectDuration * 20, 0));
-                ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundWailingSoundsMessage(pos, true), pos, level);
+                ArcaneLanterns.NETWORK.sendToAllNear(pos, level, new ClientboundWailingSoundsMessage(pos, true));
             }
         });
         blockEntity.count = 0;

@@ -38,7 +38,19 @@ public class ArcaneLanterns implements ModConstructor {
 
 	@Override
 	public void onRegisterCreativeModeTabs(CreativeModeTabContext context) {
-		context.registerCreativeModeTab(CreativeModeTabConfigurator.from(MOD_ID, () -> new ItemStack(Items.LANTERN)));
+		context.registerCreativeModeTab(CreativeModeTabConfigurator.from(MOD_ID, () -> new ItemStack(Items.LANTERN)).displayItems((itemDisplayParameters, output) -> {
+			output.accept(ModRegistry.LANTERN_MAKER_ITEM.get());
+			output.accept(ModRegistry.LIFE_LANTERN_ITEM.get());
+			output.accept(ModRegistry.FERAL_LANTERN_ITEM.get());
+			output.accept(ModRegistry.LOVE_LANTERN_ITEM.get());
+			output.accept(ModRegistry.WAILING_LANTERN_ITEM.get());
+			output.accept(ModRegistry.BOREAL_LANTERN_ITEM.get());
+			output.accept(ModRegistry.BRILLIANT_LANTERN_ITEM.get());
+			output.accept(ModRegistry.WARDING_LANTERN_ITEM.get());
+			output.accept(ModRegistry.CONTAINING_LANTERN_ITEM.get());
+			output.accept(ModRegistry.WITHERING_LANTERN_ITEM.get());
+			output.accept(ModRegistry.CLOUD_LANTERN_ITEM.get());
+		}));
 	}
 
 	public static ResourceLocation id(String path) {

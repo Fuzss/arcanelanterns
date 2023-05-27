@@ -35,7 +35,7 @@ public class LanternMakerBlockEntity extends BlockEntity implements ContainerImp
         BlockPos posAbove = pos.above();
         BlockState stateAbove = level.getBlockState(posAbove);
         if (stateAbove.is(Blocks.LANTERN) || stateAbove.is(Blocks.SOUL_LANTERN)) {
-            ItemStack result = blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(recipe -> recipe.assemble(blockEntity)).orElse(ItemStack.EMPTY);
+            ItemStack result = blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(recipe -> recipe.assemble(blockEntity, level.registryAccess())).orElse(ItemStack.EMPTY);
             if (!result.isEmpty()) {
                 for (ItemStack stack : blockEntity.items) {
                     if (!stack.isEmpty()) stack.shrink(1);
@@ -43,7 +43,7 @@ public class LanternMakerBlockEntity extends BlockEntity implements ContainerImp
                 blockEntity.setChanged();
                 level.destroyBlock(posAbove, false);
                 dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, result);
-                ArcaneLanterns.NETWORK.sendToAllNear(new ClientboundCraftLanternParticlesMessage(pos), pos, level);
+                ArcaneLanterns.NETWORK.sendToAllNear(pos, level, new ClientboundCraftLanternParticlesMessage(pos));
             } else {
                 destroyBlockDropCentered(level, stateAbove, posAbove);
             }
@@ -67,7 +67,7 @@ public class LanternMakerBlockEntity extends BlockEntity implements ContainerImp
     }
 
     @Override
-    public NonNullList<ItemStack> items() {
+    public NonNullList<ItemStack> getItems() {
         return this.items;
     }
 

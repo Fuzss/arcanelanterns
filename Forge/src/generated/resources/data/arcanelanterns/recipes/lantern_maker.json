@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "arcanelanterns:lantern_maker"
-  }
+  },
+  "show_notification": true
 }

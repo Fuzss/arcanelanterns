@@ -3,6 +3,7 @@ package fuzs.arcanelanterns.integration.jei;
 import fuzs.arcanelanterns.ArcaneLanterns;
 import fuzs.arcanelanterns.init.ModRegistry;
 import fuzs.arcanelanterns.world.item.crafting.LanternMakingRecipe;
+import fuzs.puzzleslib.api.core.v1.Proxy;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -86,6 +87,6 @@ public class LanternMakingRecipeCategory implements IRecipeCategory<LanternMakin
             point = rotatePointAbout(point, center, angleBetweenEach);
         }
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 131, 56).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 131, 56).addItemStack(recipe.getResultItem(Proxy.INSTANCE.getClientLevel().registryAccess()));
     }
 }

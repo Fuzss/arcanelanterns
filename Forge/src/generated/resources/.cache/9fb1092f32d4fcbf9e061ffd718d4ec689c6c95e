@@ -1,4 +1,4 @@
-// 1.19.3	2023-05-21T16:14:02.284147	Recipes
+// 1.19.4	2023-05-27T19:42:53.968306	Recipes
 60b11fc60b6035e47d84beb0c882903cb553d63c data/arcanelanterns/advancements/recipes/decorations/lantern_maker.json
 00d6a0b79db1a2af499a48ef50a35cd76cc94502 data/arcanelanterns/advancements/recipes/misc/boreal_lantern.json
 608e2346378698112147b1b0abdb34d6d61d86d9 data/arcanelanterns/advancements/recipes/misc/brilliant_lantern.json
@@ -15,7 +15,7 @@ a5537d40ed5524a04f11599ee31b6a796a3d38ef data/arcanelanterns/advancements/recipe
 b3162e6dc7069c7b60980b347004f775f30f92f1 data/arcanelanterns/recipes/cloud_lantern.json
 21a128af9f1dc87d889f0f3c63f77c5a1ebac022 data/arcanelanterns/recipes/containing_lantern.json
 31ab67382ff1a3a574fc4298733f193f71fc022e data/arcanelanterns/recipes/feral_lantern.json
-5366e6f4295c3207a2d8b8d94f86a3c774d1bb44 data/arcanelanterns/recipes/lantern_maker.json
+88ecce2d931a64124ef0f78357de1fb2b844af35 data/arcanelanterns/recipes/lantern_maker.json
 acd560ff7c4ad39fefe94ba25786cf0aebb9e549 data/arcanelanterns/recipes/life_lantern.json
 0bddcf6b962ef9c6b46affb25ae5208d6734ef72 data/arcanelanterns/recipes/love_lantern.json
 d1f267969349485e89b0c59ddabacd73b2f0ac83 data/arcanelanterns/recipes/wailing_lantern.json
