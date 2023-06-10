@@ -24,7 +24,7 @@ class LanternMakingRecipeBuilder extends ShapelessRecipeBuilder {
     private final Item result;
     private final int count;
     private final List<Ingredient> ingredients = Lists.newArrayList();
-    private final Advancement.Builder advancement = Advancement.Builder.advancement();
+    private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
     @Nullable
     private String group;
 

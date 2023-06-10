@@ -28,5 +28,6 @@ public class ModBlockTagsProvider extends AbstractTagProvider.Blocks {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.CONTAINING_LANTERN_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.WITHERING_LANTERN_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModRegistry.CLOUD_LANTERN_BLOCK.get());
+        this.tag(BlockTags.REPLACEABLE).add(ModRegistry.SPARK_BLOCK.get());
     }
 }

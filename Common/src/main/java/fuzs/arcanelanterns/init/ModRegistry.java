@@ -15,15 +15,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class ModRegistry {
     static final RegistryManager REGISTRY = RegistryManager.instant(ArcaneLanterns.MOD_ID);
-    public static final RegistryReference<Block> LANTERN_MAKER_BLOCK = REGISTRY.registerBlock("lantern_maker", () -> new LanternMakerBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(4.0F).noOcclusion()));
-    public static final RegistryReference<Block> SPARK_BLOCK = REGISTRY.registerBlock("spark", () -> new SparkBlock(BlockBehaviour.Properties.of(Material.FIRE, MaterialColor.FIRE).sound(SoundType.WOOL).randomTicks().instabreak().noLootTable().lightLevel(state -> {
+    public static final RegistryReference<Block> LANTERN_MAKER_BLOCK = REGISTRY.registerBlock("lantern_maker", () -> new LanternMakerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).destroyTime(4.0F).noOcclusion()));
+    public static final RegistryReference<Block> SPARK_BLOCK = REGISTRY.registerBlock("spark", () -> new SparkBlock(BlockBehaviour.Properties.of().mapColor(MapColor.FIRE).replaceable().sound(SoundType.WOOL).randomTicks().instabreak().noLootTable().lightLevel(state -> {
         return 15;
-    }).noCollission().noOcclusion()));
+    }).noCollission().noOcclusion().pushReaction(PushReaction.DESTROY)));
     public static final RegistryReference<Block> LIFE_LANTERN_BLOCK = REGISTRY.registerBlock("life_lantern", () -> new LifeLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)));
     public static final RegistryReference<Block> FERAL_LANTERN_BLOCK = REGISTRY.registerBlock("feral_lantern", () -> new FeralLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)));
     public static final RegistryReference<Block> LOVE_LANTERN_BLOCK = REGISTRY.registerBlock("love_lantern", () -> new LoveLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)));
